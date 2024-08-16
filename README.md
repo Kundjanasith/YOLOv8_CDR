@@ -59,9 +59,9 @@ results = model({image_path}, conf=0.001, iou=0.8)
 
 2. Handling Multiple Detections
 
-&nbsp;&nbsp;&nbsp;&nbsp; Due to the parameter adjustments made in the previous step, it is possible to detect more than one cup and dis per image, which is unusual.
+&nbsp;&nbsp;&nbsp;&nbsp; Due to the parameter adjustments made in the previous step, it is possible to detect more than one cup and disc per image, which is unusual.
 
-This work implements a simple logic to identify the correct cup and disc: It first identifies the largest dis that contains a cup. Then, it finds the largest cup within that dis.
+This work implements a simple logic to identify the correct cup and disc: It first identifies the largest disc that contains a cup. Then, it finds the largest cup within that disc.
 ```
 code
 ```
@@ -77,8 +77,8 @@ code
 
     More detail for paremter adjusting with YOLOv8 [https://docs.ultralytics.com/usage/cfg/#predict-settings](https://docs.ultralytics.com/usage/cfg/#predict-settings)
 
-2. Due to the previous step adjusting the parameter whrn inferenicng then it might be possible to detect more than one cup and dis per image which is not usually
-    This work provide simple logic to find the cup and dis 
+2. Due to the previous step adjusting the parameter whrn inferenicng then it might be possible to detect more than one cup and disc per image which is not usually
+    This work provide simple logic to find the cup and disc 
     First, this work find the largest disc with has cup inside
     Second, this work find the largest cup inside the largest disc
 
