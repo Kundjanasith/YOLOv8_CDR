@@ -1,8 +1,8 @@
 # YOLOv8_CDR
 
-This work applied YOLOv8 to segmemt cup and disc area from color fundus phtography (CFP) from NIDEK and EIDON camera and then calculate cup-to-disc ratio for detecting glaucoma.
+This study utilized YOLOv8 to segment the cup and disc areas in color fundus photography (CFP) captured by NIDEK and EIDON cameras, followed by the calculation of the cup-to-disc ratio for glaucoma detection.
 
-This work utilize same dataset from this project [https://github.com/biodatlab/si-eye-screening](https://github.com/biodatlab/si-eye-screening)
+This work utilizes the same dataset as the project available at [https://github.com/biodatlab/si-eye-screening](https://github.com/biodatlab/si-eye-screening)
 
 ## Dataset
 
@@ -14,11 +14,16 @@ This work utilize same dataset from this project [https://github.com/biodatlab/s
 
 ## Training image segmentation
 
-> python train_yolov8.py
+> python src/train_yolov8.py
 
-After training for 100 epochs 
+Training for 100 epochs 
 
-Download the pre-trained model [here](/model)
+|       | F1-score | Precision | Recall | Precision-Recall |
+| :---: | -------- | --------- | ------ | ---------------- |
+| Box   | ![](model/BoxF1_curve.png) | ![](model/BoxP_curve.png) | ![](model/BoxR_curve.png) | ![](model/BoxPR_curve.png) |
+| Box   | ![](model/MaskF1_curve.png) | ![](model/MaskP_curve.png) | ![](model/MaskR_curve.png) | ![](model/MaskPR_curve.png) |
+
+You can download the pre-trained model  [here](/model)
 
 ## Utilizing yolov8 for image segmentation and cup
 
