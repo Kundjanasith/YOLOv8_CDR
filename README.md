@@ -100,6 +100,7 @@ python src/inference.py {input_image_path} {output_image_path} {input_label_path
 ```
 
 Example output
+
 ![](imgs/out.png)
 
 ### Experimental results
@@ -113,10 +114,13 @@ Confusion matrix
 #### In testing dataset
 
 > 8 samples predicted as normal but are actually glaucoma
-| Testing  | Validation |
+| #01  | Validation |
 | -------- | ---------- | 
 |          |            |
 > 2 samples predicted as glaucoma but are actually normal
+| #01  | #02 |
+| -------- | ---------- | 
+| ![](imgs/testing/3036.jpg) | ![](imgs/testing/4094.jpg) |
 
 
 
