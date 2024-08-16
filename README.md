@@ -61,8 +61,46 @@ results = model({image_path}, conf=0.001, iou=0.8)
 
 This work implements a simple logic to identify the correct cup and disc: It first identifies the largest disc that contains a cup. Then, it finds the largest cup within that disc.
 ```
-code
+results = model(input_image_path,conf=0.001,iou=0.8)
+cup_arr = []
+dis_arr = []
+for result in results:
+    if result.masks is None:
+        continue
+    for mask, box in zip(result.masks.xy, result.boxes):
+        points = np.int32([mask])
+        if box.cls[0] == 0:
+            if 0 not in points[0]:
+                cup_arr.append(points[0])
+        if box.cls[0] == 1:
+            if 0 not in points[0]:
+                dis_arr.append(points[0])
+cup_polygons = [Polygon([tuple(point) for point in coords]) for coords in cup_arr]
+dis_polygons = [Polygon([tuple(point) for point in coords]) for coords in dis_arr]
+result = []
+for dis_index, dis_poly in enumerate(dis_polygons):
+    contained_cup_polygons = [red_poly for red_poly in cup_polygons if red_poly.within(dis_poly)]
+    if contained_cup_polygons:
+        highest_cup_poly = max(contained_cup_polygons, key=lambda p: max(point[1] for point in p.exterior.coords)-min(point[1] for point in p.exterior.coords)) 
+        result.append({
+            "dis_polygon_index": dis_index,
+            "dis_polygon_area": dis_poly.area,
+            "largest_cup_polygon": highest_cup_poly,
+            "largest_cup_polygon_index": cup_polygons.index(highest_cup_poly),
+            "largest_cup_polygon_area": highest_cup_poly.area
+        })
+if result:
+    largest_dis_poly_result = max(result, key=lambda x: x["dis_polygon_area"])
+else:
+    print("No red polygons are contained within any green polygons.")
 ```
+
+```
+python src/inference.py {input_image_path} {output_image_path} {input_label_path}
+```
+
+Example output
+![](imgs/out.png)
 
 ### Experimental results
 
@@ -71,3 +109,18 @@ Confusion matrix
 | Testing  | Validation |
 | -------- | ---------- | 
 | ![](imgs/train01_test.png) | ![](imgs/train01_val.png) |
+
+#### In testing dataset
+
+> 8 samples predicted as normal but are actually glaucoma
+| Testing  | Validation |
+| -------- | ---------- | 
+|          |            |
+> 2 samples predicted as glaucoma but are actually normal
+
+
+
+
+
+
+#### In validation dataset
