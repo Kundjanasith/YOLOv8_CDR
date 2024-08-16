@@ -107,24 +107,19 @@ Example output
 
 Confusion matrix
 
-| Testing  | Validation |
-| -------- | ---------- | 
-| ![](imgs/train01_test.png) | ![](imgs/train01_val.png) |
+![](imgs/train01_test.png) 
 
 #### In testing dataset
 
 > 8 samples predicted as normal but are actually glaucoma
-| #01  | Validation |
-| -------- | ---------- | 
-|          |            |
+
+| #01  | #02 | #03 | #04 | #05 | #06 | #07 | #08 | 
+| ---- | --- | --- | --- | --- | --- | --- | --- |
+| ![](imgs/testing/099R.jpg) | ![](imgs/testing/28f1ca57fc8d6a7c957ed43e965e1ef1.jpg) |  ![](imgs/testing/4023.jpg) |  ![](imgs/testing/3287.jpg) |  ![](imgs/testing/3675.jpg ) |  ![](imgs/testing/4339.jpg) |  ![](imgs/testing/4382.jpg) |  ![](imgs/testing/4423.jpg) |
+
 > 2 samples predicted as glaucoma but are actually normal
+
 | #01  | #02 |
 | -------- | ---------- | 
 | ![](imgs/testing/3036.jpg) | ![](imgs/testing/4094.jpg) |
 
-
-
-
-
-
-#### In validation dataset
