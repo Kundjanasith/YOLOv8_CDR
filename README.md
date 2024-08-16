@@ -1,6 +1,6 @@
 # YOLOv8_CDR
 
-This study utilized YOLOv8 to segment the cup and disc areas in color fundus photography (CFP) captured by NIDEK and EIDON cameras, followed by the calculation of the cup-to-disc ratio for glaucoma detection.
+This work utilized YOLOv8 to segment the cup and disc areas in color fundus photography (CFP) captured by NIDEK and EIDON cameras, followed by the calculation of the cup-to-disc ratio for glaucoma detection.
 
 This work utilizes the same dataset as the project available at [https://github.com/biodatlab/si-eye-screening](https://github.com/biodatlab/si-eye-screening)
 
@@ -8,9 +8,9 @@ This work utilizes the same dataset as the project available at [https://github.
 
 |       | Total | Glaucoma (NIDEK/EIDON) | Normal (NIDEK/EIDON) |
 | :---: | -----: | -----: | -----: |
-| Train | 2,732 | | 
+| Train | 2,732 | 128 (28/100) | 2,604(1,194/1,410) |
 | Test  |   342 |               9 (1/8) | 333 (172/161) |
-| Val   |   342 | | 
+| Val   |   342 |              15 (5/10)| 327 (164/163) |
 
 ## Image segmentation
 
@@ -28,8 +28,6 @@ Training for 100 epochs
 You can download the pre-trained model  [here](/model)
 
 ### Evaluation
-
-Here's the data formatted as a markdown table:
 
 | Class | Images | Instances | Box(P) | Box(R) | Box mAP50 | Box mAP50-95 | Mask(P) | Mask(R) | Mask mAP50 | Mask mAP50-95 |
 |-------|--------|-----------|--------|--------|-----------|--------------|---------|---------|------------|---------------|
@@ -66,20 +64,10 @@ This work implements a simple logic to identify the correct cup and disc: It fir
 code
 ```
 
-<!-- What the different between this work ando default inferencing?
+### Experimental results
 
-1. Adjusting 'conf' and 'iou' when inferencing with YOLOv8
-    Default inferencing
-    > results = model({image_path}, conf=0.25, iou=0.7)
+Confusion matrix
 
-    THis work inferencing 
-    > results = model({image_path}, conf=0.001, iou=0.8)
-
-    More detail for paremter adjusting with YOLOv8 [https://docs.ultralytics.com/usage/cfg/#predict-settings](https://docs.ultralytics.com/usage/cfg/#predict-settings)
-
-2. Due to the previous step adjusting the parameter whrn inferenicng then it might be possible to detect more than one cup and disc per image which is not usually
-    This work provide simple logic to find the cup and disc 
-    First, this work find the largest disc with has cup inside
-    Second, this work find the largest cup inside the largest disc
-
- -->
+| Testing  | Validation |
+| -------- | ---------- | 
+| ![](imgs/train01_test.png) | ![](imgs/train01_val.png) |
